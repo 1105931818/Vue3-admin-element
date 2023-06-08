@@ -1,16 +1,25 @@
-import { defineStore } from 'pinia';
+import { defineStore, StoreDefinition, _UnwrapAll } from 'pinia';
 import { reqLogin } from '@/api/user';
-import token from '@/utils/token';
-import { loginForm } from '@/utils/type';
+import Token from '@/utils/token';
+import { loginForm, loginRes, UserStore } from '@/utils/type';
+import { constRoute } from '@/router/routes';
 
-const userInfo = defineStore('userInfo', () => {
-  let _token: string;
+const userInfo: StoreDefinition<
+  'userInfo',
+  _UnwrapAll<Pick<UserStore, 'menuRoute'>>,
+  Pick<UserStore, never>,
+  Pick<UserStore, 'login'>
+> = defineStore('userInfo', (): UserStore => {
+  let _token: string | null;
+
   return {
+    menuRoute: constRoute,
+
     async login(data: loginForm): Promise<string> {
-      const result: any = await reqLogin(data);
+      const result: loginRes | any = await reqLogin(data);
       if (result.code === 200) {
-        _token = result.data.token;
-        token.setToken(_token);
+        _token = result.data.token as string;
+        Token.token = _token;
         return result.message;
       } else {
         return Promise.reject(new Error(result.message));

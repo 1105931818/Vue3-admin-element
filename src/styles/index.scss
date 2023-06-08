@@ -1,1 +1,12 @@
 @import './reset.scss';
+
+//滚动条样式
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 20px;
+    background-color: $base-menu-background;
+    border-radius: 5px;
+}

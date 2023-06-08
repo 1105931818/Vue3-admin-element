@@ -1,3 +1,5 @@
+import type { RouteRecordRaw } from 'vue-router';
+
 type Data = {
   token?: string;
   checkUser?: T;
@@ -24,4 +26,14 @@ export interface loginRes {
   code: number;
   message: string;
   data: Data;
+}
+
+export interface UserStore {
+  menuRoute: Array<RouteRecordRaw>;
+  login(data: loginForm): Promise<string>;
+}
+
+export interface Settings {
+  isChange: boolean;
+  upChange(): void;
 }

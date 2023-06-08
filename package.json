@@ -15,7 +15,6 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
     "prepare": "husky install",
-    "commitlint": "commitlint --config commitlint.config.cjs -e -V",
     "preinstall": "node ./scripts/preinstall.js"
   },
   "dependencies": {
