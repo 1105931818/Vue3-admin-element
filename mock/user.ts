@@ -1,16 +1,6 @@
 //用户信息数据
 import { MockMethod } from 'vite-plugin-mock';
-type T = {
-  userId: number;
-  avatar: string;
-  username: string;
-  password: string;
-  desc: string;
-  roles: string[];
-  buttons: string[];
-  routes: string[];
-  token: string;
-};
+import { T } from '../src/utils/type';
 
 function createUserList(): Array<T> {
   return [

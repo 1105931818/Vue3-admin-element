@@ -1,3 +1,4 @@
+import { Ref } from 'vue';
 import type { RouteRecordRaw } from 'vue-router';
 
 type Data = {
@@ -5,7 +6,7 @@ type Data = {
   checkUser?: T;
 };
 
-type T = {
+export interface T {
   userId: number;
   avatar: string;
   username: string;
@@ -15,7 +16,7 @@ type T = {
   buttons: string[];
   routes: string[];
   token: string;
-};
+}
 
 export interface loginForm {
   username: string;
@@ -29,11 +30,19 @@ export interface loginRes {
 }
 
 export interface UserStore {
+  avatar: Ref<string>;
+  name: Ref<string>;
   menuRoute: Array<RouteRecordRaw>;
   login(data: loginForm): Promise<string>;
+  getinfo(): Promise<string | void>;
+  logout(): void;
 }
 
 export interface Settings {
   isChange: boolean;
+  isSwitch: boolean;
+  isRefsh: boolean;
   upChange(): void;
+  upSwitch(): void;
+  upRefsh(): void;
 }

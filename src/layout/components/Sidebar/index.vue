@@ -1,12 +1,12 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" :class="{ fold: SettingStore().isSwitch }">
     <div class="top">
       <Logo />
     </div>
     <div class="content">
       <el-scrollbar class="sidebar_item" native>
         <el-menu
-          background-color="#956A61"
+          :background-color="SettingStore().isSwitch ? '#1a1a1a' : '#956A61'"
           text-color="white"
           active-text-color="black"
           :collapse="SettingStore().isChange"
@@ -45,6 +45,11 @@ const menus: ComputedRef<Array<RouteRecordRaw>> = computed<RouteRecordRaw[]>(
   margin: 0;
   box-sizing: border-box;
   background-color: $base-menu-background;
+
+  &.fold {
+    background-color: #1a1a1a;
+    border-right: 2px solid #6b6b6b;
+  }
 
   .top {
     width: 100%;

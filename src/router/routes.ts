@@ -40,6 +40,7 @@ export const constRoute: Array<RouteRecordRaw> = [
       title: '商品管理',
       icon: 'ShoppingBag',
     },
+    redirect: '/product/attr',
     children: [
       {
         name: 'attr',
@@ -87,6 +88,7 @@ export const constRoute: Array<RouteRecordRaw> = [
       title: '权限管理',
       icon: 'Lock',
     },
+    redirect: '/permissions/userper',
     children: [
       {
         name: 'userper',

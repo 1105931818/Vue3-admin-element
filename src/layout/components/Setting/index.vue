@@ -1,14 +1,28 @@
 <template>
-  <div class="settings">
+  <div class="settings" :class="{ fold: SettingStore().isSwitch }">
     <router-view v-slot="{ Component }">
       <transition name="fade">
-        <component :is="Component" />
+        <component :is="Component" v-if="flag" />
       </transition>
     </router-view>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SettingStore from '@/store/setting';
+import { nextTick, ref, watch } from 'vue';
+
+let flag = ref<boolean>(true);
+watch(
+  () => SettingStore().isRefsh,
+  () => {
+    flag.value = false;
+    nextTick(() => {
+      flag.value = true;
+    });
+  },
+);
+</script>
 
 <style scoped lang="scss">
 .settings {
@@ -22,6 +36,11 @@
     $base-nav-background,
     $base-set-background
   );
+
+  &.fold {
+    background-image: linear-gradient(to bottom, #1a1a1a, #1a1a1a);
+    color: white;
+  }
 }
 
 .fade-enter-active {

@@ -3,15 +3,22 @@ import { Settings } from '@/utils/type';
 
 const settings: StoreDefinition<
   'settings',
-  _UnwrapAll<Pick<Settings, 'isChange'>>,
+  _UnwrapAll<Pick<Settings, 'isChange' | 'isSwitch' | 'isRefsh'>>,
   Pick<Settings, never>,
-  Pick<Settings, 'upChange'>
+  Pick<Settings, 'upChange' | 'upSwitch' | 'upRefsh'>
 > = defineStore('settings', (): Settings => {
-  let isChange: boolean;
   return {
     isChange: false,
+    isSwitch: false,
+    isRefsh: false,
     upChange() {
       this.isChange = !this.isChange;
+    },
+    upSwitch() {
+      this.isSwitch = !this.isSwitch;
+    },
+    upRefsh() {
+      this.isRefsh = !this.isRefsh;
     },
   };
 });

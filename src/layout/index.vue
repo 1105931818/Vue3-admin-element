@@ -1,9 +1,6 @@
 <template>
   <div class="layout">
-    <div
-      class="navlink"
-      :class="{ fold: SettingStore().isChange ? true : false }"
-    >
+    <div class="navlink" :class="{ fold: SettingStore().isChange }">
       <Sidebar />
     </div>
     <div class="main">

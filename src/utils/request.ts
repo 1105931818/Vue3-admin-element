@@ -1,6 +1,7 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ElMessage } from 'element-plus';
+import Token from '@/utils/token';
 
 type Result<T> = {
   code: number;
@@ -24,6 +25,7 @@ export class Request {
     //请求拦截器
     this.instance.interceptors.request.use(
       (config: InternalAxiosRequestConfig<any>) => {
+        config.headers.token = Token.token;
         return config;
       },
       (err: any) => {

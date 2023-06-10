@@ -43,12 +43,13 @@
 import { reactive, ref } from 'vue';
 import { User, Lock } from '@element-plus/icons-vue';
 import userInfo from '@/store/user';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { loginForm } from '@/utils/type';
 import { ElMessage, ElNotification, FormRules } from 'element-plus';
 import timer from '@/utils/timer';
 
 const router = useRouter();
+const route = useRoute();
 const user = reactive<loginForm>({ username: 'admin', password: '111111' });
 let load = ref<boolean>(false);
 const login = ref<Promise<any> | any>();
@@ -81,6 +82,8 @@ const userlogin = async () => {
           title: timer.message,
         });
         load.value = false;
+        usertodo.getinfo();
+        route.query;
         router.push({ name: 'layout' });
       })
       .catch((err) => {
