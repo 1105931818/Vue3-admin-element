@@ -8,6 +8,7 @@ import gloalComponent from '@/components';
 import '@/styles/index.scss';
 import router from './router';
 import store from './store';
+import './permisstion';
 
 const app = createApp(App);
 

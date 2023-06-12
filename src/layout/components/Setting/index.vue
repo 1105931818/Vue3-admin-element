@@ -27,7 +27,6 @@ watch(
 <style scoped lang="scss">
 .settings {
   width: 100%;
-  height: 100%;
   padding: 20px;
   margin: 0;
   box-sizing: border-box;

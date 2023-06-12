@@ -11,7 +11,6 @@ const userInfo: StoreDefinition<
   Pick<UserStore, never>,
   Pick<UserStore, 'login' | 'getinfo' | 'logout'>
 > = defineStore('userInfo', (): UserStore => {
-  let _token: string | null;
   const avatar = ref<string>('');
   const name = ref<string>('');
   return {
@@ -21,8 +20,7 @@ const userInfo: StoreDefinition<
     async login(data: loginForm): Promise<string> {
       const result: loginRes | any = await reqLogin(data);
       if (result.code === 200) {
-        _token = result.data.token as string;
-        Token.token = _token;
+        Token.token = result.data.token as string;
         return result.message;
       } else {
         return Promise.reject(new Error(result.message));
