@@ -44,13 +44,14 @@ import { reactive, ref } from 'vue';
 import { User, Lock } from '@element-plus/icons-vue';
 import userInfo from '@/store/user';
 import { useRouter, useRoute } from 'vue-router';
-import { loginForm } from '@/utils/type';
+import { loginForm, UserStore } from '@/utils/type';
 import { ElMessage, ElNotification, FormRules } from 'element-plus';
 import timer from '@/utils/timer';
+import { Store, _UnwrapAll } from 'pinia';
 
 const router = useRouter();
 const route = useRoute();
-const user = reactive<loginForm>({ username: 'admin', password: '111111' });
+const user = reactive<loginForm>({ username: 'admin', password: 'atguigu123' });
 let load = ref<boolean>(false);
 const login = ref<Promise<any> | any>();
 
@@ -69,8 +70,37 @@ const userlogin = async () => {
   const result = await login.value.validate();
   if (result) {
     load.value = true;
-    const usertodo = userInfo();
+    const usertodo: Store<
+      'userInfo',
+      _UnwrapAll<Pick<UserStore, 'avatar' | 'name' | 'menuRoute'>>,
+      Pick<UserStore, never>,
+      Pick<UserStore, 'login' | 'getinfo' | 'logout' | 'loginurl' | 'infourl'>
+    > = userInfo();
     usertodo
+      .loginurl({
+        username: user.username,
+        password: user.password,
+      })
+      .then((res) => {
+        ElNotification({
+          type: 'success',
+          message: res,
+          title: timer.message,
+        });
+        load.value = false;
+        usertodo.infourl();
+        route.query;
+        router.push({ name: 'layout' });
+      })
+      .catch((err) => {
+        ElMessage({
+          showClose: true,
+          message: err,
+          type: 'error',
+        });
+        load.value = false;
+      });
+    /* usertodo
       .login({
         username: user.username,
         password: user.password,
@@ -93,7 +123,7 @@ const userlogin = async () => {
           type: 'error',
         });
         load.value = false;
-      });
+      }); */
   }
 };
 </script>

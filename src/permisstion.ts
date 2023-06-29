@@ -19,12 +19,12 @@ router.beforeEach(async (to: any, from: any, next: any) => {
         next();
       } else {
         await userStore()
-          .getinfo()
+          .infourl()
           .then(() => {
             next();
           })
-          .catch(() => {
-            userStore().logout();
+          .catch(async () => {
+            await userStore().logout();
             next({ path: 'login' });
           });
       }

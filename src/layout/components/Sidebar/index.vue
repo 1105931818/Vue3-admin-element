@@ -31,7 +31,7 @@ const menulist: Array<RouteRecordRaw> = userInfo().menuRoute;
 const menus: ComputedRef<Array<RouteRecordRaw>> = computed<RouteRecordRaw[]>(
   () => {
     return menulist.filter((item: RouteRecordRaw) => {
-      return item.meta || item.children;
+      return item.meta?.icon || item.children;
     });
   },
 );

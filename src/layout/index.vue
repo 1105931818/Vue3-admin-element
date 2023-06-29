@@ -3,7 +3,7 @@
     <div class="navlink" :class="{ fold: SettingStore().isChange }">
       <Sidebar />
     </div>
-    <div class="main">
+    <div class="main" :class="{ active: SettingStore().isChange }">
       <div class="header">
         <Navbar />
       </div>
@@ -40,8 +40,13 @@ import SettingStore from '@/store/setting';
   }
 
   .main {
-    flex: 1;
+    width: calc(100% - $base-menu-width);
     height: 100%;
+    transition: all 0.5s;
+
+    &.active {
+      width: calc(100% - $base-menu-min-width);
+    }
     .header {
       width: 100%;
       height: $base-nav-height;

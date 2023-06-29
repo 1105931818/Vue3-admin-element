@@ -14,6 +14,7 @@ export class Token {
 
   public setToken(token: string) {
     sessionStorage.setItem('TOKEN', token);
+    console.log(11111);
   }
 
   public getToken(): string | null {

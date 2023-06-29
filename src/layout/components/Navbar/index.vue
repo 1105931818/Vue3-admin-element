@@ -107,6 +107,7 @@ import SettingStore from '@/store/setting';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import userStore from '@/store/user';
+import { ElMessage } from 'element-plus';
 
 const drawer = ref<boolean>(false);
 const color = ref<string>('#A28887');
@@ -134,8 +135,23 @@ const fullScreen = () => {
 };
 
 const logout = () => {
-  userStore().logout();
-  router.push({ name: 'login', query: { redirect: route.path } });
+  userStore()
+    .logout()
+    .then((res) => {
+      ElMessage({
+        showClose: true,
+        message: res,
+        type: 'success',
+      });
+      router.push({ name: 'login', query: { redirect: route.path } });
+    })
+    .catch((err) => {
+      ElMessage({
+        showClose: true,
+        message: err,
+        type: 'error',
+      });
+    });
 };
 </script>
 
